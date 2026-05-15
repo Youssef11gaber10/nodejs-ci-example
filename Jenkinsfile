@@ -45,6 +45,7 @@ agent {
         // }
         stage("build docker image") {
             steps {
+                    sh 'newgrp docker'
 
                     sh 'docker version'
 //fetch username from cerdentials and put it in variable called DOCKER_USERNAME & password fetch from cerdentials and put it in variable called DOCKER_PASSWORD
@@ -64,6 +65,7 @@ agent {
 }
 
 stage("deploy") {
+    agent {label 'ec2-self-hosted-runner'}
     steps {
 
          withCredentials([usernamePassword(

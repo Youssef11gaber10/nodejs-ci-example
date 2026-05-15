@@ -17,7 +17,7 @@ pipeline {
                     //jenins will pull ci file from github
                     // also will git clone the repo to workspace 
                     sh 'ls -lah'//check if he fetch the  repo from github
-                    
+
                     //now we need to docker build the docker image in that code so we need to have docker on ower agent 
                     // so we need install docker on our agent but we don't use it directly we make container and bind mount docker socket to container 
                     //or use docker-in-docker dind service inside container you will create or use kaniko to build the image inside container 
@@ -25,21 +25,40 @@ pipeline {
 
                 }
             }
+        // stage("build docker image") {
+        //     steps {
+
+        //         sh 'docker version'
+        //                                     //fetch username from cerdentials and put it in variable called DOCKER_USERNAME & password fetch from cerdentials and put it in variable called DOCKER_PASSWORD
+        //         withCredentials([usernamePassword(credentialsId: 'dockerhub-credential-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) // this will be at level of this command only 
+        //         {sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}'}
+
+        //         sh '''
+        //         docker build -t youssef11gaber10/jenkins-nodeapp:latest . 
+        //         docker push youssef11gaber10/jenkins-nodeapp:latest
+        //         '''
+
+        //     }
+        // }
         stage("build docker image") {
             steps {
 
-                sh 'docker version'
-                                            //fetch username from cerdentials and put it in variable called DOCKER_USERNAME & password fetch from cerdentials and put it in variable called DOCKER_PASSWORD
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credential-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) // this will be at level of this command only 
-                sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}'
+                    sh 'docker version'
+//fetch username from cerdentials and put it in variable called DOCKER_USERNAME & password fetch from cerdentials and put it in variable called DOCKER_PASSWORD
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub-credential-id',
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )]) {
+                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    }
 
-                sh '''
-                docker build -t youssef11gaber10/jenkins-nodeapp:latest . 
-                docker push youssef11gaber10/jenkins-nodeapp:latest
-                '''
-
+                    sh '''
+                        docker build -t youssef11gaber10/jenkins-nodeapp:latest .
+                        docker push youssef11gaber10/jenkins-nodeapp:latest
+                    '''
             }
-        }
+}
 
 
 

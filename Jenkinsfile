@@ -60,6 +60,24 @@ pipeline {
             }
 }
 
+stage("deploy") {
+    steps {
+
+         withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub-credential-id',
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )]) {
+                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    }
+
+        //run the container
+        // we use daemon of my laptop this container will run on my laptop
+        sh 'docker run -d -p 3000:3000 youssef11gaber10/jenkins-nodeapp:latest'
+
+    }
+}
+
 
 
 

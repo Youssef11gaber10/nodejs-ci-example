@@ -15,7 +15,9 @@ pipeline {
                     // Get some code from a GitHub repository
                     // git 'https://github.com/Youssef11gaber10/jenkins-test.git'
                     //jenins will pull ci file from github
-                    git 'https://github.com/Youssef11gaber10/nodejs-ci-example.git' // this for pull code also from github to do operation on it 
+                    // also will git clone the repo to workspace 
+                    sh 'ls -lah'//check if he fetch the  repo from github
+                    
                     //now we need to docker build the docker image in that code so we need to have docker on ower agent 
                     // so we need install docker on our agent but we don't use it directly we make container and bind mount docker socket to container 
                     //or use docker-in-docker dind service inside container you will create or use kaniko to build the image inside container 

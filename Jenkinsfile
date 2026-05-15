@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    // agent any
+    agent ec2-self-hosted-runner
+
 
     // tools {
     //     // Install the Maven version configured as "M3" and add it to the path.
@@ -85,7 +87,7 @@ stage("deploy") {
                 success {
                     slackSend (color: '#00FF00',message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
-                
+
                 failure {
                     slackSend (color: '#FF0000',message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }

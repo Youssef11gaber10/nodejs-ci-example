@@ -76,13 +76,8 @@ stage("deploy") {
         sh 'docker run -d -p 3000:3000 youssef11gaber10/jenkins-nodeapp:latest'
 
     }
-}
 
-
-
-
-
-
+// inside stage of deploy 
             post {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
@@ -90,11 +85,13 @@ stage("deploy") {
                 success {
                     slackSend (color: '#00FF00',message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
+                
                 failure {
                     slackSend (color: '#FF0000',message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
             }
 
+}
 
         }//stages
     }//pipeline

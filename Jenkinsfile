@@ -1,7 +1,8 @@
 pipeline {
     // agent any
-    agent ec2-self-hosted-runner
-
+agent {
+    label 'ec2-self-hosted-runner'
+}
 
     // tools {
     //     // Install the Maven version configured as "M3" and add it to the path.

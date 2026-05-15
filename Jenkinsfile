@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        // maven "M3" # i don't want to install maven on agent 
-        // i will build with docker so i want install docker on agent and make containr have docker cli and 
-    }
+    // tools {
+    //     // Install the Maven version configured as "M3" and add it to the path.
+    //     // maven "M3" # i don't want to install maven on agent 
+    //     // i will build with docker so i want install docker on agent and make containr have docker cli and 
+    // }
 
     stages {
 

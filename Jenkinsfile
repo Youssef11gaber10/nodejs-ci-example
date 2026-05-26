@@ -1,3 +1,4 @@
+@Library('my_custom_shared_library')
 pipeline {
     agent any
 // agent {
@@ -43,29 +44,50 @@ pipeline {
 
         //     }
         // }
-        stage("build docker image") {
-            steps {
-                    sh 'newgrp docker'
 
-                    sh 'docker version'
-//fetch username from cerdentials and put it in variable called DOCKER_USERNAME & password fetch from cerdentials and put it in variable called DOCKER_PASSWORD
-                    withCredentials([usernamePassword(
-                        credentialsId: 'dockerhub-credential-id',
-                        usernameVariable: 'DOCKER_USERNAME',
-                        passwordVariable: 'DOCKER_PASSWORD'
-                    )]) {
-                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    }
 
-                    sh '''
-                        docker build -t youssef11gaber10/jenkins-nodeapp:latest .
-                        docker push youssef11gaber10/jenkins-nodeapp:latest
-                    '''
-            }
+
+
+// build normally 
+//         stage("build docker image") {
+//             steps {
+//                     sh 'newgrp docker'
+
+//                     sh 'docker version'
+// //fetch username from cerdentials and put it in variable called DOCKER_USERNAME & password fetch from cerdentials and put it in variable called DOCKER_PASSWORD
+//                     withCredentials([usernamePassword(
+//                         credentialsId: 'dockerhub-credential-id',
+//                         usernameVariable: 'DOCKER_USERNAME',
+//                         passwordVariable: 'DOCKER_PASSWORD'
+//                     )]) {
+//                         sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+//                     }
+
+//                     sh '''
+//                         docker build -t youssef11gaber10/jenkins-nodeapp:latest .
+//                         docker push youssef11gaber10/jenkins-nodeapp:latest
+//                     '''
+//             }
+// }
+
+
+// build with components 
+
+
+
+
+
+stage("build docker image "){
+    steps{
+
+        // def dockarize_func (String repo_name="youssef11gaber10/jenkins-nodeapp",String tag="latest", String credentialsId="dockerhub-credential-id"){  // make your input and this is default value
+
+            dockarize_func(repo_name: "youssef11gaber10/jenkins-nodeapp", tag: "v2", credentialsId: "dockerhub-credential-id") // done 
+    }
 }
 
 stage("deploy") {
-    agent {label 'ec2-self-hosted-runner'}
+    // agent {label 'ec2-self-hosted-runner'}
     steps {
 
          withCredentials([usernamePassword(

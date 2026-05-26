@@ -1,4 +1,4 @@
-@Library('my_custom_shared_library') _
+@Library('my_custom_shared_library') _ // the _ after import is syntax 
 pipeline {
     agent any
 // agent {

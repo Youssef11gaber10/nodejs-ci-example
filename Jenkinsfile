@@ -84,7 +84,8 @@ stage("build docker image "){
             // name of function here isn't call , it named with name of hte file dockerize.groovy
             script{
 
-            dockerize(repo_name: "youssef11gaber10/jenkins-nodeapp", tag: "v2", credentialsId: "dockerhub-credential-id") // done 
+            // dockerize(repo_name: "youssef11gaber10/jenkins-nodeapp", tag: "v2", credentialsId: "dockerhub-credential-id") // done 
+            dockerize( "youssef11gaber10/jenkins-nodeapp", "v2","dockerhub-credential-id")
             }
     }
 }

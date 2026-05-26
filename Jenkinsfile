@@ -79,9 +79,9 @@ pipeline {
 
 stage("build docker image "){
     steps{
-        // def dockarize_func (String repo_name="youssef11gaber10/jenkins-nodeapp",String tag="latest", String credentialsId="dockerhub-credential-id"){  // make your input and this is default value
+        // def call (String repo_name="youssef11gaber10/jenkins-nodeapp",String tag="latest", String credentialsId="dockerhub-credential-id"){  // make your input and this is default value
 
-        // name of file dockerize.groovy is name of function called it here not dockerize_func
+            // name of function here isn't call , it named with name of hte file dockerize.groovy
             dockerize(repo_name: "youssef11gaber10/jenkins-nodeapp", tag: "v2", credentialsId: "dockerhub-credential-id") // done 
     }
 }

@@ -29,5 +29,5 @@ jobs:
 
     - name: Push Docker image
       run: |
-        docker push ${{ vars.DOCKER_USERNAME }}/jenkins_iti:v1.10
+        docker push ${{ vars.DOCKER_USERNAME }}/jenkins-nodeapp:v3
 

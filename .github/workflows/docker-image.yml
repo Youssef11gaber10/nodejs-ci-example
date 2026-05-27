@@ -19,7 +19,7 @@ jobs:
       run: |
         docker build . \
         --file Dockerfile \
-        --tag ${{ vars.DOCKER_USERNAME }}/jenkins_iti:v1.10
+        --tag ${{ vars.DOCKER_USERNAME }}/jenkins-nodeapp:v3
 
     - name: Login to Docker Hub
       run: |

@@ -1,4 +1,4 @@
-FROM node:js
+FROM node:18
 COPY nodeapp /nodeapp
 WORKDIR /nodeapp
 RUN npm install

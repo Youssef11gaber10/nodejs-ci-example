@@ -9,7 +9,7 @@ jobs:
 
   build:
 
-    runs-on: youssef-runner
+    runs-on: self-hosted
 
     steps:
 
